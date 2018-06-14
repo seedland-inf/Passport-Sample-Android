@@ -1,0 +1,118 @@
+apply plugin: 'com.android.application'
+
+/*---------------------------------------------------
+ 开发环境：     Android Studio 3.0.0 及以上
+ Gradle插件：  com.android.tools.build:gradle:3.0.0 及以上
+ ---------------------------------------------------*/
+
+android {
+
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "cc.seedland.inf.samples"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号
+        resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
+    }
+    buildTypes {
+        /*----- 测试环境 开发调试时使用 -----*/
+        debug {
+            resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
+            resValue "string", "passport_key", "hay8qwz"          // PassportSDK的开发者Key
+        }
+        release {
+
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    /*---------------- 生产环境 快照版 -----------------*/
+    //    implementation('cc.seedland.inf:passport:1.0.1-SNAPSHOT@aar'){
+    //        transitive=true
+    //    }
+    /*---------------- 生产环境 稳定版 -----------------*/
+    //    implementation('cc.seedland.inf:passport:1.0.0@aar'){
+    //        transitive=true
+    //    }
+    /*---------------- 测试环境 开发版 -----------------*/
+    implementation('cc.seedland.inf:passport:1.0.3@aar') {
+        transitive = true
+        changing = true
+    }
+
+    /*
+            同时在gradle.properties中使用dev环境的REPO_URL
+            buildType中使debug的设置生效
+            */
+}
+
+
+/*---------------------------------------------------
+ 开发环境：     Android Studio 2.3.3 及以下
+ Gradle插件：  com.android.tools.build:gradle:2.3.3 及以下
+ ---------------------------------------------------*/
+
+/*
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "cc.seedland.inf.samples"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号
+        resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support:support-annotations:26.1.0'
+
+    compile('cc.seedland.inf:passport:1.0.0-SNAPSHOT@aar'){
+        transitive=true
+    }
+}
+*/

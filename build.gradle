@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.1'    // Android Studio 3.0.0及以上版本使用
+//        classpath 'com.android.tools.build:gradle:2.3.3'  // Android Studio 2.3.3及以下版本使用
+
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+//        maven {url REPO_URL}
+        maven {url 'http://developer.seedland.cc/nexus/repository/maven-dev/'}
+//        maven {url 'http://developer.seedland.cc/nexus/repository/maven-public/'}
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
