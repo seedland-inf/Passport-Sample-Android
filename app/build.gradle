@@ -17,14 +17,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
-        resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号
-        resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
+        resValue "string", "channel", "passport.android"         // PassportSDK的渠道号
+        resValue "string", "key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
     }
     buildTypes {
         /*----- 测试环境 开发调试时使用 -----*/
         debug {
-            resValue "string", "passport_channel", "test"         // PassportSDK的渠道号
-            resValue "string", "passport_key", "hay8qwz"          // PassportSDK的开发者Key
+            resValue "string", "channel", "test"         // PassportSDK的渠道号
+            resValue "string", "key", "hay8qwz"          // PassportSDK的开发者Key
         }
         release {
 
@@ -56,7 +56,7 @@ dependencies {
     //        transitive=true
     //    }
     /*---------------- 测试环境 开发版 -----------------*/
-    implementation('cc.seedland.inf:passport:1.0.3@aar') {
+    implementation('cc.seedland.inf:passport:1.1.0@aar') {
         transitive = true
         changing = true
     }

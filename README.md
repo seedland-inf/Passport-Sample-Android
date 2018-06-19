@@ -20,7 +20,7 @@
         * [登出](#LOGOUT)
 
 ## <a name="USE"></a>使用
-[![](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16) [![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) ![](https://img.shields.io/badge/version-1.0.3-brightgreen.svg)
+[![](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16) [![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) ![](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)
 
 ### <a name=“REPO”></a>1.添加代码仓库
 
@@ -32,6 +32,7 @@ allprojects {
         google()
         jcenter()
         maven {url "http://developer.seedland.cc/nexus/repository/maven-public/"}
+        // maven {url "http://developer.seedland.cc/nexus/repository/maven-dev/"} // 测试环境联调时使用
     }
 }
 ```
@@ -42,7 +43,7 @@ allprojects {
 * 3.0.0及以后版本
 ```gradle
 dependencies {
-    implementation('cc.seedland.inf:passport:1.0.0@aar'){
+    implementation('cc.seedland.inf:passport:1.1.0@aar'){
             transitive=true
     }
 }
@@ -51,7 +52,7 @@ dependencies {
 * 2.3.3及以前版本
 ```gradle
 dependencies {
-    compile('cc.seedland.inf:passport:1.0.0@aar'){
+    compile('cc.seedland.inf:passport:1.1.0@aar'){
             transitive=true
     }
 }
@@ -72,9 +73,9 @@ dependencies {
 ```gradle
 
 defaultConfig {
-        // passport_channel和passport-key为资源名，可任意命名，但必须满足资源命名规则
-        resValue "string", "passport_channel", "your channel"      // PassportSDK的渠道号
-        resValue "string", "passport_key", "your key"              // PassportSDK的开发者Key
+        // channel和key为资源名，固定使用以下名称
+        resValue "string", "channel", "your channel"      // SDK的渠道号
+        resValue "string", "key", "your key"              // SDK的开发者Key
 }
 ```
 
@@ -131,7 +132,7 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // 初始化，传入开发者channel和开发者key
-        PassportHome.getInstance().init(this, getString(R.string.passport_channel), getString(R.string.passport_key));
+        PassportHome.init(this);
         
         ...
     }
