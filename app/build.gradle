@@ -17,8 +17,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
-        resValue "string", "channel", "passport.android"         // PassportSDK的渠道号
-        resValue "string", "key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
+        resValue "string", "channel", "passport.android"         // SDK的渠道号
+        resValue "string", "key", "dk^wBXnw3cUUqBgB"             // SDK的开发者Key
     }
     buildTypes {
         /*----- 测试环境 开发调试时使用 -----*/
@@ -37,7 +37,7 @@ android {
 }
 
 configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
 }
 
 dependencies {
