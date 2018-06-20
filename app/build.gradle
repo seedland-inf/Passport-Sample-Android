@@ -6,7 +6,14 @@ apply plugin: 'com.android.application'
  ---------------------------------------------------*/
 
 android {
-
+    signingConfigs {
+        config {
+            keyAlias 'sample'
+            keyPassword 'sample'
+            storeFile file('/Users/xuchunlei/Projects/seedland/Passport-Sample-Android/app/sample.jks')
+            storePassword 'sample'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "cc.seedland.inf.samples"
@@ -27,11 +34,15 @@ android {
             resValue "string", "key", "hay8qwz"          // PassportSDK的开发者Key
         }
         release {
+            resValue "string", "channel", "passport.android"         // SDK的渠道号
+            resValue "string", "key", "dk^wBXnw3cUUqBgB"             // SDK的开发者Key
 
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -47,24 +58,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    /*---------------- 生产环境 快照版 -----------------*/
-    //    implementation('cc.seedland.inf:passport:1.0.1-SNAPSHOT@aar'){
-    //        transitive=true
-    //    }
-    /*---------------- 生产环境 稳定版 -----------------*/
-    //    implementation('cc.seedland.inf:passport:1.0.0@aar'){
-    //        transitive=true
-    //    }
-    /*---------------- 测试环境 开发版 -----------------*/
+
     implementation('cc.seedland.inf:passport:1.1.0@aar') {
         transitive = true
         changing = true
     }
-
     /*
-            同时在gradle.properties中使用dev环境的REPO_URL
-            buildType中使debug的设置生效
-            */
+                    同时在gradle.properties中使用dev环境的REPO_URL
+                    buildType中使debug的设置生效
+                    */
 }
 
 

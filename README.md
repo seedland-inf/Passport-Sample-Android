@@ -85,6 +85,7 @@ defaultConfig {
 
 ```
 -ignorewarnings
+-keep class **.R$* {*;}
 
 #okhttp
 -dontwarn okhttp3.**
