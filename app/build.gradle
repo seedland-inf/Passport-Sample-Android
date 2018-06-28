@@ -1,3 +1,4 @@
+
 apply plugin: 'com.android.application'
 
 /*---------------------------------------------------
@@ -26,13 +27,16 @@ android {
 
         resValue "string", "channel", "passport.android"         // SDK的渠道号
         resValue "string", "key", "dk^wBXnw3cUUqBgB"             // SDK的开发者Key
+        resValue "string", "template", "hachi"       // 模版：default-实地；hachi-哈奇
+        resValue "string", "agreement","https://hachiapp.pujiapp.com/V6/page/help/useAgreement.html" // 用户协议
     }
     buildTypes {
-        /*----- 测试环境 开发调试时使用 -----*/
+        /*----------- 测试环境 -----------*/
         debug {
-            resValue "string", "channel", "test"         // PassportSDK的渠道号
-            resValue "string", "key", "hay8qwz"          // PassportSDK的开发者Key
+            resValue "string", "channel", "test"         // SDK的渠道号
+            resValue "string", "key", "hay8qwz"          // SDK的开发者Key
         }
+        /*----------- 线上环境 -----------*/
         release {
             resValue "string", "channel", "passport.android"         // SDK的渠道号
             resValue "string", "key", "dk^wBXnw3cUUqBgB"             // SDK的开发者Key
@@ -59,62 +63,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    implementation('cc.seedland.inf:passport:1.1.0@aar') {
+    implementation('cc.seedland.inf:passport:2.0.0@aar') {
         transitive = true
         changing = true
     }
-    /*
-                    同时在gradle.properties中使用dev环境的REPO_URL
-                    buildType中使debug的设置生效
-                    */
 }
-
-
-/*---------------------------------------------------
- 开发环境：     Android Studio 2.3.3 及以下
- Gradle插件：  com.android.tools.build:gradle:2.3.3 及以下
- ---------------------------------------------------*/
-
-/*
-android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
-    defaultConfig {
-        applicationId "cc.seedland.inf.samples"
-        minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        resValue "string", "passport_channel", "passport.android"         // PassportSDK的渠道号
-        resValue "string", "passport_key", "dk^wBXnw3cUUqBgB"             // PassportSDK的开发者Key
-    }
-
-    buildTypes {
-
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestCompile 'com.android.support:support-annotations:26.1.0'
-
-    compile('cc.seedland.inf:passport:1.0.0-SNAPSHOT@aar'){
-        transitive=true
-    }
-}
-*/
