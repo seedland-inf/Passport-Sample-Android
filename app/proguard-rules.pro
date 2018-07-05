@@ -20,7 +20,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Appliction
+
 -ignorewarnings
+-keep class **.R$* {*;}
 
 #okhttp
 -dontwarn okhttp3.**
@@ -41,8 +45,12 @@
 ##---------------End: proguard configuration for Gson  ----------
 
 # passport
+-keepattributes InnerClasses
 -keepparameternames
 -keep class cc.seedland.inf.passport.PassportHome{*;}
+-keepparameternames
+-keep class cc.seedland.inf.passport.stat.**{*;}
+-keep class cc.seedland.inf.passport.stat.PassportStatAgent$Builder{*;}
 -keep public class * extends cc.seedland.inf.network.BaseBean{*;}
 -keep class cc.seedland.inf.network.BaseBean{*;}
 -keep class cc.seedland.inf.network.BeanWrapper{*;}
