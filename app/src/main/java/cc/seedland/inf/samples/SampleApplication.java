@@ -34,6 +34,11 @@ public class SampleApplication extends Application {
             public void onPageEvent(String pageId) {
                 Log.e("stat", "page " + pageId + " launched");
             }
+
+            @Override
+            public void onHtmlEvent(String pageUrl) {
+                Log.e("stat", "html page " + pageUrl + " launched");
+            }
         };
         PassportStatAgent.Builder builder = new PassportStatAgent.Builder(engine);
         builder.loginPassword("b050116")
@@ -42,6 +47,7 @@ public class SampleApplication extends Application {
                 .passwordReset("b050120")
                 .registerPerform("b050121")
                 .passwordModifyPerform("b050055")
+                .agreement("b050132")
                 .loginPasswordPage("p020002")
                 .loginCaptchaPage("p020051")
                 .passwordResetPage("p020003")
