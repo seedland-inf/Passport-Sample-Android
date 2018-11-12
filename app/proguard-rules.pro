@@ -35,12 +35,12 @@
 -keep class okio.**{*;}
 
 ##---------------Begin: proguard configuration for Gson  ----------
--keepattributes Signature
--keepattributes *Annotation*
--dontwarn sun.misc.**
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
+#-keepattributes Signature
+#-keepattributes *Annotation*
+#-dontwarn sun.misc.**
+#-keep class * implements com.google.gson.TypeAdapterFactory
+#-keep class * implements com.google.gson.JsonSerializer
+#-keep class * implements com.google.gson.JsonDeserializer
 
 ##---------------End: proguard configuration for Gson  ----------
 

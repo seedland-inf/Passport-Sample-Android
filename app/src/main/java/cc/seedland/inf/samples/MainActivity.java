@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (requestCode) {
                 case REQUEST_CODE_LOGIN:
                     Bundle args = data.getBundleExtra("result");
-                    Config.saveUid(String.valueOf(args.getInt("uid")));
+                    Config.saveUid(String.valueOf(args.getString("uid")));
                     Config.saveNickName(args.getString("nickname"));
                     Config.saveMobile(args.getString("mobile"));
                     updateState();

@@ -20,7 +20,7 @@
         * [登出](#LOGOUT)
 
 ## <a name="USE"></a>使用
-[![](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16) [![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) ![](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)
+[![](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16) [![](https://img.shields.io/badge/platform-android-brightgreen.svg)](https://developer.android.com/index.html) ![](https://img.shields.io/badge/version-2.1.0-brightgreen.svg)
 
 ### <a name=“REPO”></a>1.添加代码仓库
 
@@ -40,19 +40,9 @@ allprojects {
 
 **在App的build.gradle文件的dependencies块中，添加**
 
-* 3.0.0及以后版本
 ```gradle
 dependencies {
-    implementation('cc.seedland.inf:passport:1.1.0@aar'){
-            transitive=true
-    }
-}
-```
-
-* 2.3.3及以前版本
-```gradle
-dependencies {
-    compile('cc.seedland.inf:passport:1.1.0@aar'){
+    implementation('cc.seedland.inf:passport:2.1.0@aar'){
             transitive=true
     }
 }
@@ -60,9 +50,10 @@ dependencies {
 
 ### <a name="SUPPORT"></a>3.添加开发者支持
 
-**获取开发者channel和开发者key**
+**获取开发者channel、开发者key，提供用户协议url**
 
 （wiki）
+用户协议url在注册界面中使用，申请channel和key时，请一起提供，否则用户点击“用户协议”链接时，将***<mark>不能正常打开用户协议界面</mark>***
 
 **将开发者channel及key到工程**
 
@@ -84,6 +75,9 @@ defaultConfig {
 2. 如果项目中已经添加okhttp和Gson的混淆规则，直接添加# passport部分的混淆规则即可
 
 ```
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Appliction
+
 -ignorewarnings
 -keep class **.R$* {*;}
 
@@ -95,19 +89,13 @@ defaultConfig {
 -dontwarn okio.**
 -keep class okio.**{*;}
 
-##---------------Begin: proguard configuration for Gson  ----------
--keepattributes Signature
--keepattributes *Annotation*
--dontwarn sun.misc.**
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
-##---------------End: proguard configuration for Gson  ----------
-
 # passport
+-keepattributes InnerClasses
 -keepparameternames
 -keep class cc.seedland.inf.passport.PassportHome{*;}
+-keepparameternames
+-keep class cc.seedland.inf.passport.stat.**{*;}
+-keep class cc.seedland.inf.passport.stat.PassportStatAgent$Builder{*;}
 -keep public class * extends cc.seedland.inf.network.BaseBean{*;}
 -keep class cc.seedland.inf.network.BaseBean{*;}
 -keep class cc.seedland.inf.network.BeanWrapper{*;}
@@ -133,7 +121,7 @@ public class SampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // 初始化，传入开发者channel和开发者key
+        // 初始化
         PassportHome.init(this);
         
         ...
@@ -199,7 +187,7 @@ PassportHome.getInstance().startLoginByPassword(this, REQUEST_CODE_LOGIN);
 ```java
 ...
 
-执行操作返回码为*RESULT_OK*，未执行操作返回码为*RESULT_CANCELED*
+执行操作返回码为RESULT_OK，未执行操作返回码为RESULT_CANCELED
 
 @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
